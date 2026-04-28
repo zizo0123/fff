@@ -1,0 +1,29 @@
+<app-sidebar>
+  <div class="create-post-container">
+    <h1>Create New Post</h1>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="post-form">
+      <div class="form-group">
+        <label for="description">What's on your mind?</label>
+        <textarea
+          id="description"
+          name="description"
+          [(ngModel)]="post.description"
+          placeholder="Share your thoughts..."
+          rows="8"
+          required></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          {{ isLoading ? 'Creating Post...' : 'Create Post' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</app-sidebar>

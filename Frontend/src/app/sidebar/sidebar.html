@@ -1,0 +1,42 @@
+<div class="sidebar-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.open]="isMenuOpen">
+    <div class="sidebar-header">
+      <h2>Blog App</h2>
+      <button class="close-btn" (click)="toggleMenu()" *ngIf="isMenuOpen">✕</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a (click)="navigateTo('/home')" class="nav-link">🏠 Home</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="navigateTo('/posts')" class="nav-link">📝 Posts</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="navigateTo('/create-post')" class="nav-link">✏️ Create Post</a></li>
+        <li><a (click)="navigateTo('/profile')" class="nav-link">👤 Profile</a></li>
+        <li *ngIf="isLoggedIn" class="divider"></li>
+        <li *ngIf="isLoggedIn">
+          <p class="user-info">Logged in as: <strong>{{ userName }}</strong></p>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button *ngIf="isLoggedIn" (click)="logout()" class="logout-btn">
+        🚪 Logout
+      </button>
+      <div *ngIf="!isLoggedIn" class="auth-links">
+        <a (click)="navigateTo('/login')" class="nav-link">Login</a>
+        <a (click)="navigateTo('/register')" class="nav-link">Register</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Hamburger Menu Button -->
+  <button class="hamburger" (click)="toggleMenu()" *ngIf="!isMenuOpen">
+    ☰
+  </button>
+
+  <!-- Main Content Area -->
+  <main class="main-content" [class.sidebar-open]="isMenuOpen">
+    <ng-content></ng-content>
+  </main>
+</div>
